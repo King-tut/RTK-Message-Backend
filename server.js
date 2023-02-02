@@ -13,7 +13,7 @@ import { fileURLToPath } from "url"
 
 import {register, login} from "./controllers/register.js"
 import {findUsersForMessages} from "./controllers/users.js"
-import { gotEmAll, postMessage } from "./controllers/message.js"
+import { gotEmAll, postMessage, updateSeenMessage, deleteMessage } from "./controllers/message.js"
 import User from "./models/User.js"
 
 
@@ -53,6 +53,8 @@ app.post("/auth/login", login)
 
 app.get("/users/:id",findUsersForMessages)
 app.get("/show-messages/:id", gotEmAll)
+app.patch("/read-messages", updateSeenMessage)
+app.delete('/delete-message', deleteMessage)
 
 //Post routes
 

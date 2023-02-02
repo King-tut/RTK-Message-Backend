@@ -66,3 +66,36 @@ export const gotEmAll = async (req, res)=>{
     }
 
 }
+
+export const updateSeenMessage = async (req,res)  => {
+    try{
+        const  id = req.body._id 
+        console.log(id)
+        const updatedmessage = await Message.findOneAndUpdate({_id: id}, {seen: true}, {new: true})
+            if(updatedmessage){
+                console.log(updatedmessage)
+                res.status(200).json(updatedmessage)
+
+             }
+
+    }catch(err){
+        res.status(400).json({msg: err.message})
+    }
+    
+}
+
+export const deleteMessage = async (req,res) =>{
+    try{
+        const id = req.body._id;
+        const deleteMessage = await Message.findOneAndDelete({_id: id})
+        if(deleteMessage){
+            res.status(200).json({msg: "The message has been deleted. "})
+
+        }
+    }catch(err){
+        res.status(400).json({msg: err.message})
+
+    }
+
+
+}
